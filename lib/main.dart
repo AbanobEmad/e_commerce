@@ -1,6 +1,8 @@
 import 'package:ecommerce/Provider/ModelAdmin.dart';
 import 'package:ecommerce/Provider/ModelHud.dart';
 import 'package:ecommerce/Screens/admin/Add_Product.dart';
+import 'package:ecommerce/Screens/admin/Edit_Product.dart';
+import 'package:ecommerce/Screens/admin/Manage_product.dart';
 import 'file:///G:/Pflutter/12/e_commerce/lib/Screens/user/Home.dart';
 import 'file:///G:/Pflutter/12/e_commerce/lib/Screens/admin/HomeAdmin.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
           SignUp.id :(context)=>SignUp(),
           HomeAdmin.id:(context)=>HomeAdmin(),
           Home.id:(context)=>Home(),
-          Add_Product.id:(context)=>Add_Product(),
+          AddProduct.id:(context)=>AddProduct(),
+          ManagePeoduct.id:(context)=>ManagePeoduct(),
+          EtidProduct.id:(context)=>EtidProduct(),
         },
       ),
     );
