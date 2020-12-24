@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                           child: GestureDetector(
                         onTap: () {
                           Provider.of<ModelAdmin>(context, listen: false)
-                              .changeisAdmin(false);
+                              .changeisAdmin(true);
                         },
                         child: Text(
                           "I\ m Admin",
@@ -118,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             Provider.of<ModelAdmin>(context, listen: false)
-                                .changeisAdmin(true);
+                                .changeisAdmin(false);
                           },
                           child: Text(
                             "I\ m User ",

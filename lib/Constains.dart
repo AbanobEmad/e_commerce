@@ -7,3 +7,4 @@ const KProductDescription="productDescription";
 const KProductCaTegory="productCaTegory";
 const KProductLocation="productLocation";
 const KProductsCollection="products";
+const KUnActiveColor=Color(0xFFC1BDB8);
