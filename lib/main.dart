@@ -3,8 +3,9 @@ import 'package:ecommerce/Provider/ModelHud.dart';
 import 'package:ecommerce/Screens/admin/Add_Product.dart';
 import 'package:ecommerce/Screens/admin/Edit_Product.dart';
 import 'package:ecommerce/Screens/admin/Manage_product.dart';
-import 'file:///G:/Pflutter/12/e_commerce/lib/Screens/user/Home.dart';
-import 'file:///G:/Pflutter/12/e_commerce/lib/Screens/admin/HomeAdmin.dart';
+import 'package:ecommerce/Screens/admin/HomeAdmin.dart';
+import 'package:ecommerce/Screens/user/Home.dart';
+import 'package:ecommerce/Screens/user/productInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,13 +30,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: LoginScreen.id,
         routes: {
+          ProductInfo.id:(context)=>ProductInfo(),
           LoginScreen.id : (context)=>LoginScreen(),
           SignUp.id :(context)=>SignUp(),
           HomeAdmin.id:(context)=>HomeAdmin(),
-          Home.id:(context)=>Home(),
           AddProduct.id:(context)=>AddProduct(),
           ManagePeoduct.id:(context)=>ManagePeoduct(),
           EtidProduct.id:(context)=>EtidProduct(),
+          Home.id:(context)=>Home(),
         },
       ),
     );

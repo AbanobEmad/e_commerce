@@ -1,12 +1,12 @@
 import 'package:ecommerce/CustomWidget/CustomTextField.dart';
 import 'package:ecommerce/Provider/ModelAdmin.dart';
 import 'package:ecommerce/Provider/ModelHud.dart';
-import 'file:///G:/Pflutter/12/e_commerce/lib/Screens/admin/HomeAdmin.dart';
+import 'package:ecommerce/Screens/user/Home.dart';
+import 'package:ecommerce/Screens/admin/HomeAdmin.dart';
 import 'package:ecommerce/Services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Constains.dart';
-import 'Home.dart';
 import 'SignUp_Screen.dart';
 import '../../CustomWidget/Logo.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

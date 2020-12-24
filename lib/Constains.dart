@@ -8,3 +8,7 @@ const KProductCaTegory="productCaTegory";
 const KProductLocation="productLocation";
 const KProductsCollection="products";
 const KUnActiveColor=Color(0xFFC1BDB8);
+const KJackets="Jackets";
+const KTrousers="Trousers";
+const KTShirts ="T-Shirts";
+const KShose="Shose";
