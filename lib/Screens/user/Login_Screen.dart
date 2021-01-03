@@ -10,12 +10,25 @@ import '../../Constains.dart';
 import 'SignUp_Screen.dart';
 import '../../CustomWidget/Logo.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
-  final Auth _auth = new Auth();
-  String Email, Password;
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+class LoginScreen extends StatefulWidget {
   static String id = 'LoginScreen';
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final Auth _auth = new Auth();
+
+  String Email, Password;
+
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+  bool KeepMeLoggedin=false;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -48,6 +61,27 @@ class LoginScreen extends StatelessWidget {
                     Password = value;
                   },
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>
+                    [
+                      Text("Remmeber Me",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                      Checkbox(
+                        activeColor: KConstColor,
+                          value: KeepMeLoggedin,
+                          onChanged: (value)
+                          {
+                            setState(() {
+                              KeepMeLoggedin=value;
+                            });
+                          }
+                      ),
+
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: height * .06,
                 ),
@@ -59,6 +93,10 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20)),
                         color: Colors.black,
                         onPressed: ()  {
+                          if(KeepMeLoggedin==true)
+                            {
+                              KeepUserLoggedIn();
+                            }
                           _Validate(context);
                         },
                         child: Text(
@@ -82,9 +120,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (_globalKey.currentState.validate()) {
                           Navigator.pushNamed(context, SignUp.id);
-                        }
                       },
                       child: Text(
                         'SignUp',
@@ -170,5 +206,11 @@ class LoginScreen extends StatelessWidget {
       }
     }
     _modelHud.changeisLoadind(false);
+  }
+
+  void KeepUserLoggedIn() async
+  {
+    SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+    sharedPreferences.setBool(KKeepMeLoggedIn, KeepMeLoggedin);
   }
 }

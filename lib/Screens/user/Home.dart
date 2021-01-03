@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/Constains.dart';
 import 'package:ecommerce/CustomWidget/ViewProduct.dart';
 import 'package:ecommerce/Models/Product.dart';
+import 'package:ecommerce/Screens/user/CartView.dart';
+import 'package:ecommerce/Screens/user/Login_Screen.dart';
 import 'package:ecommerce/Services/Store.dart';
+import 'package:ecommerce/Services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatefulWidget {
   static String id="Home";
 
@@ -14,6 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _tabBarIndex=0;
   final Store _store =Store();
+  final Auth _auth=Auth();
   int _indexNavigation=0;
   List<Product> _products=[];
   @override
@@ -27,18 +32,20 @@ class _HomeState extends State<Home> {
                 type: BottomNavigationBarType.shifting,
                 fixedColor: KConstColor,
                 currentIndex: _indexNavigation,
-                onTap: (value){
+                onTap: (value)async {
+                  if(value==2)
+                    {
+                      SharedPreferences shared= await SharedPreferences.getInstance();
+                      shared.clear();
+                      await _auth.SignOut();
+                      Navigator.popAndPushNamed(context, LoginScreen.id);
+                    }
                   setState(() {
                     _indexNavigation=value;
                   });
                 },
                 elevation: 5,
                 items:const <BottomNavigationBarItem> [
-                  BottomNavigationBarItem(
-                      label: "test1",
-                      icon: Icon(Icons.person),
-                      backgroundColor: Colors.green
-                  ),
                   BottomNavigationBarItem(
                       label: "test2",
                       icon: Icon(Icons.person),
@@ -50,8 +57,8 @@ class _HomeState extends State<Home> {
                       backgroundColor: Colors.yellow
                   ),
                   BottomNavigationBarItem(
-                      label: "test4",
-                      icon: Icon(Icons.person),
+                      label: "Sign Out",
+                      icon: Icon(Icons.close),
                       backgroundColor: Colors.red
                   ),
                 ],
@@ -110,7 +117,11 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text("Discover".toUpperCase(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Icon(Icons.shopping_cart)
+                  GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, CartView.id);
+                      },
+                      child: Icon(Icons.shopping_cart))
                 ],
               ),
             ),

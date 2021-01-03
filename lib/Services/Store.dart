@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/Constains.dart';
 import 'package:ecommerce/Models/Product.dart';
@@ -25,5 +26,19 @@ class Store {
   editroduct(data,DocumentId)
   {
     _firestore.collection(KProductsCollection).doc(DocumentId).update(data);
+  }
+  StorOrder(data,List<Product>products)
+  {
+    var docRef= _firestore.collection(KOrders).doc();
+    docRef.set(data);
+    for(var product in products)
+      {
+        docRef.collection(KOrderDetails).doc().set({
+          KProductName:product.pname,
+          KProductPrice: product.pprice,
+          KQuantity : product.pquantity,
+          KProductLocation : product.plocation
+        });
+      }
   }
 }
